@@ -2,6 +2,10 @@ import requests
 import datetime
 import os
 from dotenv import load_dotenv
+from colorama import init, Fore, Back, Style
+
+# Initialize colorama
+init(autoreset=True)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -25,7 +29,7 @@ def get_weather_data():
     if response.status_code == 200:
         return response.json()
     else:
-        print(f"Error fetching weather data: {response.status_code}")
+        print(f"{Fore.RED}Error fetching weather data: {response.status_code}")
         return None
 
 def display_weather_report(weather_data):
@@ -34,26 +38,26 @@ def display_weather_report(weather_data):
         weather = weather_data['weather'][0]
         wind = weather_data['wind']
         
-        print("\n=== Weather Report for Kano, Nigeria ===")
-        print(f"Date and Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print(f"Weather: {weather['main']} ({weather['description']})")
-        print(f"Temperature: {kelvin_to_celsius(main['temp']):.1f}°C")
-        print(f"Feels Like: {kelvin_to_celsius(main['feels_like']):.1f}°C")
-        print(f"Min Temperature: {kelvin_to_celsius(main['temp_min']):.1f}°C")
-        print(f"Max Temperature: {kelvin_to_celsius(main['temp_max']):.1f}°C")
-        print(f"Humidity: {main['humidity']}%")
-        print(f"Pressure: {main['pressure']} hPa")
-        print(f"Wind Speed: {wind['speed']} m/s")
-        print(f"Wind Direction: {wind['deg']}°")
+        print(f"\n{Back.BLUE}{Fore.WHITE}{Style.BRIGHT}=== Weather Report for Kano, Nigeria ==={Style.RESET_ALL}")
+        print(f"{Fore.CYAN}Date and Time: {Fore.YELLOW}{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"{Fore.CYAN}Weather: {Fore.YELLOW}{weather['main']} ({weather['description']})")
+        print(f"{Fore.CYAN}Temperature: {Fore.YELLOW}{kelvin_to_celsius(main['temp']):.1f}°C")
+        print(f"{Fore.CYAN}Feels Like: {Fore.YELLOW}{kelvin_to_celsius(main['feels_like']):.1f}°C")
+        print(f"{Fore.CYAN}Min Temperature: {Fore.YELLOW}{kelvin_to_celsius(main['temp_min']):.1f}°C")
+        print(f"{Fore.CYAN}Max Temperature: {Fore.YELLOW}{kelvin_to_celsius(main['temp_max']):.1f}°C")
+        print(f"{Fore.CYAN}Humidity: {Fore.YELLOW}{main['humidity']}%")
+        print(f"{Fore.CYAN}Pressure: {Fore.YELLOW}{main['pressure']} hPa")
+        print(f"{Fore.CYAN}Wind Speed: {Fore.YELLOW}{wind['speed']} m/s")
+        print(f"{Fore.CYAN}Wind Direction: {Fore.YELLOW}{wind['deg']}°")
         if 'rain' in weather_data:
-            print(f"Rainfall (last 1h): {weather_data['rain'].get('1h', 0)} mm")
-        print("=====================================")
+            print(f"{Fore.CYAN}Rainfall (last 1h): {Fore.YELLOW}{weather_data['rain'].get('1h', 0)} mm")
+        print(f"{Back.BLUE}{Fore.WHITE}{Style.BRIGHT}====================================={Style.RESET_ALL}")
     else:
-        print("Unable to fetch weather data.")
+        print(f"{Fore.RED}Unable to fetch weather data.")
 
 def main():
     if not API_KEY:
-        print("Error: OpenWeatherMap API key not found. Please set it in the .env file.")
+        print(f"{Fore.RED}Error: OpenWeatherMap API key not found. Please set it in the .env file.")
         return
     
     weather_data = get_weather_data()

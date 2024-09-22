@@ -1,12 +1,13 @@
 # Kano Weather Report Application
 
-This Python application fetches and displays the current weather report for Kano, Nigeria using the OpenWeatherMap API.
+This Python application fetches and displays the current weather report for Kano, Nigeria using the OpenWeatherMap API. It features a colorful command-line output for enhanced readability.
 
 ## Features
 
 - Real-time weather data for Kano, Nigeria
 - Displays various weather metrics including temperature, humidity, wind speed, and more
 - Converts temperature from Kelvin to Celsius
+- Colorful command-line output for better visibility
 - Error handling for API requests
 - Uses environment variables for secure API key storage
 
@@ -15,6 +16,7 @@ This Python application fetches and displays the current weather report for Kano
 - Python 3.6+
 - `requests` library
 - `python-dotenv` library
+- `colorama` library
 
 ## Installation
 
@@ -22,7 +24,7 @@ This Python application fetches and displays the current weather report for Kano
 2. Install the required libraries:
 
 ```
-pip install requests python-dotenv
+pip install requests python-dotenv colorama
 ```
 
 3. Sign up for a free API key at [OpenWeatherMap](https://openweathermap.org/api).
@@ -42,9 +44,11 @@ Run the script from the command line:
 python kano_weather_app.py
 ```
 
-The application will display the current weather report for Kano, Nigeria in your console.
+The application will display the current weather report for Kano, Nigeria in your console with colored output.
 
 ## Sample Output
+
+The output will be similar to the following, but with colors:
 
 ```
 === Weather Report for Kano, Nigeria ===
@@ -63,7 +67,7 @@ Wind Direction: 90°
 
 ## Error Handling
 
-The application includes error handling for API requests and will display appropriate error messages if it fails to fetch weather data.
+The application includes error handling for API requests and will display appropriate error messages in red if it fails to fetch weather data.
 
 ## Customization
 
@@ -72,6 +76,8 @@ To change the city or country, modify the `CITY` variable in the script. For exa
 ```python
 CITY = "Lagos,NG"
 ```
+
+You can also customize the colors by modifying the `Fore`, `Back`, and `Style` parameters in the `display_weather_report` function.
 
 ## Contributing
 
